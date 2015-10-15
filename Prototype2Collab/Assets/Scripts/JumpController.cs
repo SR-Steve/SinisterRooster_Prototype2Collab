@@ -10,7 +10,7 @@ using System.Collections;
 namespace JakeHohing
 {
 
-    public class Moveleftright : MonoBehaviour
+    public class JumpController : MonoBehaviour
     {
         Rigidbody2D bod;
 
