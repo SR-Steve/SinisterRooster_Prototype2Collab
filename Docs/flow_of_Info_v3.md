@@ -83,10 +83,10 @@ https://github.com/SR-Steve/SinisterRooster_Prototype2Collab
 
 The last step, final product resources, assets and CODE.
 
-- One material makes it through Google, and once it is made official, it will be pushed to Github.
- - Our Github repository is the last stop in this chain of information. But since Github is fairly technical, and since not everyone needs to be familiar with git commands, access to Github push is limited to programmers and team leads only.
- - Programmers are encouraged to double-check the official Google account in order to make sure that what is being pushed to Git is in accord with the official and approved documentation. Of course it’s inevitable that some things on Github will not be on Google, but it’s important to make sure that our shared vision is cohesive.
- - If you have any questions about git, don’t be afraid to ask.
+- Once material makes it through Google, and once it is made official, it will be pushed to Github.
+- Our Github repository is the last stop in this chain of information. But since Github is fairly technical, and since not everyone needs to be familiar with git commands, access to Github push is limited to programmers and team leads only.
+- Programmers are encouraged to double-check the official Google account in order to make sure that what is being pushed to Git is in accord with the official and approved documentation. Of course it’s inevitable that some things on Github will not be on Google, but it’s important to make sure that our shared vision is cohesive.
+- If you have any questions about git, don’t be afraid to ask.
 
 
 ----------
