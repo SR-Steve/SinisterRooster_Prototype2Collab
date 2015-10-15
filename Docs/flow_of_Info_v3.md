@@ -10,6 +10,7 @@ While all of us are excited about the production of **Snip**, in order to make t
 ----------
 
 **The Flow of information:**
+
 **SLACK** *to* **TRELLO** *to* **GOOGLE** *to* **GITHUB**
 
 Game documentation goes through several channels before becoming official. It begins in the realm of conversation and idea, which is then complied into draft material, which is then submitted and reviewed before being published. Nothing is set in stone until it reaches the official folders, which are hosted on Google. These folders provide the materials from which our codebase is constructed. There are now four platforms through which our studio manages the flow of information: **Slack**, **Trello**, the official **Google** account, and finally, **Github**. 
