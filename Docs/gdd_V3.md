@@ -38,7 +38,7 @@ Anais will have an interaction prompt appear above her when next to a block that
 
 The movement buttons prompt will remain to the side of Anais that the block is not on until the player presses the interaction button again, causing Anais to release the block.  By letting go of the block, the prompt for the left and right movement keys to fade out.
 
-**Pushing and Pulling- Ladders:** 
+**Pushing and Pulling - Ladders:** 
 There will be a single ladder in the library that Anais will need to move to the beginning of the library in order to climb up it onto the top of a bookshelf, which she will jump off of onto a Chandelier.  When Anais stands to the left or the right of the Ladder, an interaction prompt will appear over her head.  By pressing the interaction button, Anais will grab the side of the ladder she is closest to, and after grabbing it, a prompt for the left and right movement keys will appear on the side of Anais that the ladder is not on, informing the player that Anais can move left or right to push or pull the ladder.  The interaction button prompt will remain over Anais’ head as long as she is:
 
  - Near the Ladder.
@@ -53,7 +53,7 @@ When the player has Anais stand directly in front of the ladder, the interaction
  - She climbs up beyond the base of the ladder. (This means if she climbs *any* amount higher than the base of the ladder where she mounted it.)
  - She climbs down a Ladder from the top. (This means if she climbs *any* amount lower than the top of the ladder where she mounted it.)
 
-**Pulleys- Lowering/Raising Platforms:** 
+**Pulleys - Lowering/Raising Platforms:** 
 Upon jumping onto the Chandelier, it will slowly lower, causing one of the bookshelves in the library to slowly slide over, revealing a Rift for her to Snip.  The chandelier will lower all the way down so that the lowest part of it is barely touching the floor, but will not touch the floor. 
 
 Once Anais Jumps off of the Chandelier, it will rise back into place. She must stay on the Chandelier the entire time it lowers to the floor in order for the movement of the bookshelf to trigger.  
