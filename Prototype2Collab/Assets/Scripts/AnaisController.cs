@@ -22,12 +22,12 @@ namespace SteveGussman{
 		
 		/* turnTime records the time when the player changes direction
 	       so that there can be a delay in the visual flip - Steve */
-		float turnTime;
-		bool turning;
-		bool right;
+		public float turnTime;
+		public bool turning;
+		public bool right;
 		
 		// For checking whether you're on the ground (able to jump) -Steve
-		bool grounded;
+		public bool grounded;
 		public Transform groundCheck;
 		float groundRadius = 0.05f;
 		public LayerMask whatIsGround;
@@ -35,9 +35,14 @@ namespace SteveGussman{
 		
 		// Reference to Animator component -Steve
 		Animator anim;
-	
-		// Initialization -Steve
-		void Start(){
+
+        //To push/pull blocks - Branden
+        public bool Grab = false;
+        public bool justGrabbed = false;
+        public Rigidbody2D Crate;
+
+        // Initialization -Steve
+        void Start(){
 		
 			//In case Anais prefab is initilized staring left in a level -Steve
 			//right = transform.localScale.x < 0f ? false : true;
@@ -91,8 +96,19 @@ namespace SteveGussman{
 						Flip();
 				}else // Walking left and facing left -Steve
 					maxSpeed = 2f;
-					
-			}
+
+                if (Grab)
+                {
+                    Crate.velocity = (new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0));
+                    if (Input.GetAxis("Action") != 0 && !justGrabbed) //Should gave frame where it cannot be pressed again -Branden
+                    {
+                        Grab = false;
+                        Crate = null;
+                        Crate.isKinematic = true; //So it can't be pushed again -Branden
+                    }
+                }
+
+            }
 		}
 		
 		// Turns the player around logically and visually -Steve
@@ -101,5 +117,17 @@ namespace SteveGussman{
 			turning = false;
 			transform.localScale = new Vector3(-transform.localScale.x, 1f, 1f);
 		}
-	}
+
+        void OnTriggerStay2D(Collider2D other)
+        {
+            if (other.gameObject.tag == "Crate") //Checks for tag Crate -Branden
+                if (grounded && Input.GetAxis("Action") != 0) //Grabs if grounded after pressing x -Branden
+                {
+                    Grab = true; //For grabbing and letting go -Branden
+                    justGrabbed = true;
+                    Crate = other.gameObject.GetComponentInParent<Rigidbody2D>(); //getting Crate rigidbody -Branden
+                    Crate.isKinematic = false; //Crate is Kinematic naturally -Branden
+                }
+        }
+    }
 }
