@@ -94,6 +94,7 @@ The producers want to thank everyone involved in the creation of Snip. We also w
 With a little bit of luck and a lot of hard work, we are certain that we can make Snip an amazing experience for all of us. If for any reason you feel like your ideas are not being heard, or if you feel as though you are being left of out of the loop, please let us know immediately. We want production of Snip to be both fun and exciting for everyone!
 
 Thank you all for your hard work and great ideas,
+
 **Project Management**
 
  
