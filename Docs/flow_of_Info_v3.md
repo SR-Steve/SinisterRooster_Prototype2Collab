@@ -35,7 +35,9 @@ The below chart explains the process in even more detail.
 
 
 **(1) SLACK | FOR COMMUNICATION**
+
 https://rcgamestudio.slack.com
+
 Studio & team messaging, general conversation, draft sharing, and think-tank.
 
  - Slack is the communication platform through which all members of the studio are expected to communicate. Slack channels have been created for teams to self-organize, share ideas, and work on draft projects. All files and conversations shared in slack are considered as drafts.
@@ -48,7 +50,9 @@ Studio & team messaging, general conversation, draft sharing, and think-tank.
 
 ----------
 **(2) TRELLO | FOR TRACKING**
+
 https://trello.com/
+
 Team-specific goals, deadlines, planning, tracking, and transparency.
 
  - Trello is the planning platform and tracking in which teams are expected to post specific goals, delegate specific responsibilities to team members, and track specific progress in order to make sure that overall goals are met.
@@ -60,8 +64,11 @@ Team-specific goals, deadlines, planning, tracking, and transparency.
 
 ----------
 **(3) GOOGLE | FOR PRODUCTION**
+
 Email: rcgamestudio15@gmail.com
+
 Google Drive Official: https://goo.gl/1WQt6X
+
 Official approved assets, communications, and marketing.
 
  - The official Google account to which you can email your finalized ideas and communicate directly with project management. 
@@ -70,7 +77,9 @@ Official approved assets, communications, and marketing.
 
 ----------
 **(4) GITHUB | FOR PROGRAMMING**
+
 https://github.com/SR-Steve/SinisterRooster_Prototype2Collab
+
 The last step, final product resources, assets and CODE.
 
 - One material makes it through Google, and once it is made official, it will be pushed to Github.
