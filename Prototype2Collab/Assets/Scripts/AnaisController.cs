@@ -104,7 +104,7 @@ namespace SteveGussman{
                     {
                         Grab = false;
                         Crate = null;
-                        Crate.isKinematic = true; //So it can't be pushed again -Branden Hey
+                        Crate.isKinematic = true; //So it can't be pushed again -Branden Hey times 2
                     }
                 }
 
