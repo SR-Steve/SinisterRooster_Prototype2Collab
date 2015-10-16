@@ -96,21 +96,19 @@ namespace SteveGussman{
 						Flip();
 				}else // Walking left and facing left -Steve
 					maxSpeed = 2f;
-
-                if (Grab)
-                {
-                    Crate.velocity = (new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0));
-                    if (Input.GetAxis("Action")!=0 && !justGrabbed) //Should gave frame where it cannot be pressed again -Branden
-                    {
-                        Grab = false;
-                        Crate.isKinematic = true; //So it can't be pushed again -Branden Hey times 2
-                        Crate.velocity = (new Vector2(0, 0));
-                    }
-                    else
-                        justGrabbed = false;
-                }
-
             }
+			if (Grab)
+			{
+				Crate.velocity = (new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0));
+				if (Input.GetAxis("Action")!=0 && !justGrabbed) //Should gave frame where it cannot be pressed again -Branden
+				{
+					Grab = false;
+					Crate.isKinematic = true; //So it can't be pushed again -Branden Hey times 2
+					Crate.velocity = (new Vector2(0, 0));
+				}
+				else
+					justGrabbed = false;
+			}
 		}
 		
 		// Turns the player around logically and visually -Steve
