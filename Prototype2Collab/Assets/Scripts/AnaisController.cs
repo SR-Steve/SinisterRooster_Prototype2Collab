@@ -100,12 +100,14 @@ namespace SteveGussman{
                 if (Grab)
                 {
                     Crate.velocity = (new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0));
-                    if (Input.GetAxis("Action") != 0 && !justGrabbed) //Should gave frame where it cannot be pressed again -Branden
+                    if (Input.GetAxis("Action")!=0 && !justGrabbed) //Should gave frame where it cannot be pressed again -Branden
                     {
                         Grab = false;
-                        Crate = null;
                         Crate.isKinematic = true; //So it can't be pushed again -Branden Hey times 2
+                        Crate.velocity = (new Vector2(0, 0));
                     }
+                    else
+                        justGrabbed = false;
                 }
 
             }
@@ -121,7 +123,7 @@ namespace SteveGussman{
         void OnTriggerStay2D(Collider2D other)
         {
             if (other.gameObject.tag == "Crate") //Checks for tag Crate -Branden
-                if (grounded && Input.GetAxis("Action") != 0) //Grabs if grounded after pressing x -Branden
+                if (grounded && Input.GetAxis("Action")!=0) //Grabs if grounded after pressing x -Branden
                 {
                     Grab = true; //For grabbing and letting go -Branden
                     justGrabbed = true;
