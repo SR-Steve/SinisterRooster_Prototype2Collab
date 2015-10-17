@@ -19,3 +19,6 @@
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
+
+# Never used .gitignore before, so I hope I don't break anything... trying to make Docs folder more automatically clean
+*.md~

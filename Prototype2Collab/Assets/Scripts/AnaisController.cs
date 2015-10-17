@@ -42,12 +42,12 @@ namespace SteveGussman{
 		
 		/* turnTime records the time when the player changes direction
 	       so that there can be a delay in the visual flip - Steve */
-		float turnTime;
-		bool turning;
-		bool right;
+		public float turnTime;
+		public bool turning;
+		public bool right;
 		
 		// For checking whether you're on the ground (able to jump) -Steve
-		bool grounded;
+		public bool grounded;
 		public Transform groundCheck;
 		float groundRadius = 0.05f;
 		public LayerMask whatIsGround;
@@ -55,12 +55,23 @@ namespace SteveGussman{
 		
 		// Reference to Animator component -Steve
 		Animator anim;
+<<<<<<< HEAD
 	
 		// (Temporary) controls how high player can jump - Josh
 		public float tempJumpForce = 12f;
 
 		// Initialization -Steve
 		void Start(){
+=======
+
+        //To push/pull blocks - Branden
+        public bool Grab = false;
+        public bool justGrabbed = false;
+        public Rigidbody2D Crate;
+
+        // Initialization -Steve
+        void Start(){
+>>>>>>> origin/master
 		
 			//In case Anais prefab is initilized staring left in a level -Steve
 			//right = transform.localScale.x < 0f ? false : true;
@@ -97,7 +108,7 @@ namespace SteveGussman{
 						maxSpeed = 0.67f; // Slower walk backward -Steve
 					}
 					// Walk backward slowly for 0.9 seconds before turning around -Steve
-					if(Time.time - turnTime > 0.9f)
+					else if(Time.time - turnTime > 0.9f)
 						Flip();
 				}else // Walking right & facing right -Steve
 					maxSpeed = 2f;
@@ -110,11 +121,22 @@ namespace SteveGussman{
 						maxSpeed = 0.67f; // Slower walk backward -Steve
 					} 
 					// Walk backward slowly for 0.9 seconds before turning around -Steve
-					if(Time.time - turnTime > 0.9f)
+					else if(Time.time - turnTime > 0.9f)
 						Flip();
 				}else // Walking left and facing left -Steve
 					maxSpeed = 2f;
-					
+            }
+			if (Grab)
+			{
+				Crate.velocity = (new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0));
+				if (Input.GetAxis("Action")!=0 && !justGrabbed) //Should gave frame where it cannot be pressed again -Branden
+				{
+					Grab = false;
+					Crate.isKinematic = true; //So it can't be pushed again -Branden Hey times 2
+					Crate.velocity = (new Vector2(0, 0));
+				}
+				else
+					justGrabbed = false;
 			}
 
 		}
@@ -126,6 +148,7 @@ namespace SteveGussman{
 			transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
 		}
 
+<<<<<<< HEAD
 		// Detects when two colliders hit off of each other - Josh
 		void OnCollisionEnter2D(Collision2D other)
 		{
@@ -147,4 +170,18 @@ namespace SteveGussman{
 		}
 
 	}
+=======
+        void OnTriggerStay2D(Collider2D other)
+        {
+            if (other.gameObject.tag == "Crate") //Checks for tag Crate -Branden
+                if (grounded && Input.GetAxis("Action")!=0) //Grabs if grounded after pressing x -Branden
+                {
+                    Grab = true; //For grabbing and letting go -Branden
+                    justGrabbed = true;
+                    Crate = other.gameObject.GetComponentInParent<Rigidbody2D>(); //getting Crate rigidbody -Branden
+                    Crate.isKinematic = false; //Crate is Kinematic naturally -Branden
+                }
+        }
+    }
+>>>>>>> origin/master
 }
