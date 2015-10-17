@@ -38,10 +38,14 @@ namespace JakeHohing
 
         void FixedUpdate()
         {
+        	/* 
             //Steven's movment code
             xInput = Input.GetAxis("Horizontal");
 
             bod.velocity = new Vector2(xInput * maxSpeed, bod.velocity.y);
+            
+            */ /* We should remove this commented out part altogether because
+                  I have walking in another Script.  We should also porbably merge this Script with the AnaisController -Steve */
 
             // if jump is initiated, jumpforce is applied, jump then becomes false so not to allow double jumping
             if (jump)
@@ -69,7 +73,7 @@ namespace JakeHohing
                 grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("ground"));
 
                 //jump now becomes true once grounded is true
-                if (Input.GetButtonDown("jump") && grounded)
+                if (Input.GetButtonDown("Jump") && grounded) // Changed "jump" to "Jump"; just a typo -Steve
                 {
                     jump = true;
                 }
