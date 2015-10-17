@@ -7,6 +7,7 @@ Description:  This script is for the walking controls and physics of the player
 */
 
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 // To avoid naming collisions / stay organized -Steve
@@ -38,7 +39,6 @@ namespace SteveGussman{
 
         //To push/pull blocks - Branden
         public bool Grab = false;
-        public bool justGrabbed = false;
         public Rigidbody2D Crate;
 
         // Initialization -Steve
@@ -52,7 +52,7 @@ namespace SteveGussman{
 			// Get references for component fields -Steve
 			bod = GetComponent<Rigidbody2D>();
 			anim = GetComponent<Animator>();
-		}
+        }
 		
 		// Called once per physics step -Steve
 		void FixedUpdate(){
@@ -96,22 +96,14 @@ namespace SteveGussman{
 						Flip();
 				}else // Walking left and facing left -Steve
 					maxSpeed = 2f;
-
-                if (Grab)
-                {
-                    Crate.velocity = (new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0));
-                    if (Input.GetAxis("Action")!=0 && !justGrabbed) //Should gave frame where it cannot be pressed again -Branden
-                    {
-                        Grab = false;
-                        Crate.isKinematic = true; //So it can't be pushed again -Branden Hey times 2
-                        Crate.velocity = (new Vector2(0, 0));
-                    }
-                    else
-                        justGrabbed = false;
-                }
-
             }
-		}
+
+            if (Grab) //If Grab is true -Branden
+            {
+                Crate.velocity = (new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0)); //Add the horizontal velocity to Crate -Branden
+                Invoke("justGrabbed", 1); //After a second can let go of box -Branden
+            }
+        }
 		
 		// Turns the player around logically and visually -Steve
 		void Flip(){
@@ -123,13 +115,32 @@ namespace SteveGussman{
         void OnTriggerStay2D(Collider2D other)
         {
             if (other.gameObject.tag == "Crate") //Checks for tag Crate -Branden
-                if (grounded && Input.GetAxis("Action")!=0) //Grabs if grounded after pressing x -Branden
-                {
-                    Grab = true; //For grabbing and letting go -Branden
-                    justGrabbed = true;
-                    Crate = other.gameObject.GetComponentInParent<Rigidbody2D>(); //getting Crate rigidbody -Branden
-                    Crate.isKinematic = false; //Crate is Kinematic naturally -Branden
-                }
+                    if (grounded && Input.GetAxis("Action")!=0) //Grabs if grounded after pressing x -Branden
+                    {
+                        Grab = true; //For grabbing and letting go -Branden
+                        Crate = other.gameObject.GetComponentInParent<Rigidbody2D>(); //getting Crate rigidbody -Branden
+                        Crate.isKinematic = false; //Crate is Kinematic naturally -Branden
+                    }
         }
+
+        void justGrabbed() //function that allows the play to drop the box after being picked up- Branden
+        {
+            if (Input.GetAxis("Action") != 0) //Should gave frame where it cannot be pressed again -Branden
+            {
+                Grab = false;
+                Crate.isKinematic = true; //So it can't be pushed again -Branden 
+                Crate.velocity = (new Vector2(0, 0)); //Stop the box -Branden
+            }
+        }
+
+        //Fun little side thing I made. Once the player touches the box they will begin to float up, nothing serious -Branden
+        /*void OnTriggerEnter2D(Collider2D other)
+        {
+            if(other.gameObject.tag == "FloatingCrate")
+            {
+                Crate = other.gameObject.GetComponentInParent<Rigidbody2D>(); //getting Crate rigidbody -Branden
+                Crate.velocity = (new Vector2(0, 1)); //Make it float upwards -Branden
+            }
+        }*/
     }
 }
