@@ -1,10 +1,30 @@
-﻿// Steven Gussman  10/11/15 2:56 PM (SUN)
+﻿/* Steven Gussman  10/11/15 2:56 PM (SUN)
+   Josh Castor 10/13/2015 - added temporary jump controls (with Space key)
+							made Player child of Chandelier when player lands on it
+   Josh Castor 10/16/2015 - 
+*/
 /*
 Description:  This script is for the walking controls and physics of the player
 			  but I gave it a generic name for now because it's probably best
 			  we merge things like jumping and climbing into one character
 			  controller script. -Steve
 */
+
+/**Unsolved known errors
+
+*/
+/**Solved errors: 
+	Player becomes smaller on platform -Josh
+	- Source: When player turns, player's size is dependent on platform she's on. -Josh
+    -- Reason: Player becomes child of moving platform, thereby affecting player scaling. -Josh
+    Attempted Sol: Rescale to a predetermined default before and after collision.
+    - Result: Could work with default of (0.5, 2, 1), but this would not be versatile enough and would potentially make a maintenance nightmare.
+	Sol: In Flip method(), make player's localScale change to: 
+		-transform.localScale.x, transform.localScale.y, transform.localScale.z
+		instead of:
+		-transform.localScale.x, 1f, 1f
+	
+ */
 
 using UnityEngine;
 using System.Collections;
@@ -36,6 +56,9 @@ namespace SteveGussman{
 		// Reference to Animator component -Steve
 		Animator anim;
 	
+		// (Temporary) controls how high player can jump - Josh
+		public float tempJumpForce = 12f;
+
 		// Initialization -Steve
 		void Start(){
 		
@@ -93,13 +116,35 @@ namespace SteveGussman{
 					maxSpeed = 2f;
 					
 			}
+
 		}
 		
 		// Turns the player around logically and visually -Steve
 		void Flip(){
 			right = !right;
 			turning = false;
-			transform.localScale = new Vector3(-transform.localScale.x, 1f, 1f);
+			transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
 		}
+
+		// Detects when two colliders hit off of each other - Josh
+		void OnCollisionEnter2D(Collision2D other)
+		{
+			// Lets player move with moving platform while on moving platform - Josh
+			if(other.transform.tag == "MotionPlatform")
+			{
+                transform.parent = other.transform;
+			}
+		}
+
+		// Detects when the collision above no longer occurs - Josh
+		void OnCollisionExit2D(Collision2D other)   
+		{
+			// Stops player from moving in relation to moving platform - Josh
+			if (other.transform.tag == "MotionPlatform")
+			{
+				transform.parent = null;
+			}
+		}
+
 	}
 }
