@@ -79,7 +79,7 @@ namespace SteveGussman{
 						maxSpeed = 0.67f; // Slower walk backward -Steve
 					}
 					// Walk backward slowly for 0.9 seconds before turning around -Steve
-					if(Time.time - turnTime > 0.9f)
+					else if(Time.time - turnTime > 0.9f)
 						Flip();
 				}else // Walking right & facing right -Steve
 					maxSpeed = 2f;
@@ -92,7 +92,7 @@ namespace SteveGussman{
 						maxSpeed = 0.67f; // Slower walk backward -Steve
 					} 
 					// Walk backward slowly for 0.9 seconds before turning around -Steve
-					if(Time.time - turnTime > 0.9f)
+					else if(Time.time - turnTime > 0.9f)
 						Flip();
 				}else // Walking left and facing left -Steve
 					maxSpeed = 2f;
