@@ -123,6 +123,16 @@ namespace SteveGussman{
                     }
         }
 
+        //Fun little side thing I made. Once the player touches the box they will begin to float up, nothing serious -Branden
+        /*void OnTriggerEnter2D(Collider2D other)
+        {
+            if(other.gameObject.tag == "FloatingCrate")
+            {
+                Crate = other.gameObject.GetComponentInParent<Rigidbody2D>(); //getting Crate rigidbody -Branden
+                Crate.velocity = (new Vector2(0, 1)); //Make it float upwards -Branden
+            }
+        }*/
+
         void justGrabbed() //function that allows the play to drop the box after being picked up- Branden
         {
             if (Input.GetAxis("Action") != 0) //Should gave frame where it cannot be pressed again -Branden
@@ -133,14 +143,6 @@ namespace SteveGussman{
             }
         }
 
-        //Fun little side thing I made. Once the player touches the box they will begin to float up, nothing serious -Branden
-        /*void OnTriggerEnter2D(Collider2D other)
-        {
-            if(other.gameObject.tag == "FloatingCrate")
-            {
-                Crate = other.gameObject.GetComponentInParent<Rigidbody2D>(); //getting Crate rigidbody -Branden
-                Crate.velocity = (new Vector2(0, 1)); //Make it float upwards -Branden
-            }
-        }*/
     }
+
 }
