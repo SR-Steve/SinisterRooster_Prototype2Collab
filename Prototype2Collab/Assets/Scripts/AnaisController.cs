@@ -115,6 +115,7 @@ namespace SteveGussman{
         {
             if (other.gameObject.tag == "Crate") //Checks for tag Crate -Branden
                 if (Input.GetAxis("Action") != 0) //Grabs if grounded after pressing x -Branden
+                if (grounded && Input.GetAxis("Action") != 0) //Grabs if grounded after pressing x -Branden
                 {
                     Grab = true; //For grabbing and letting go -Branden
                     Crate = other.gameObject.GetComponentInParent<Rigidbody2D>(); //getting Crate rigidbody -Branden
