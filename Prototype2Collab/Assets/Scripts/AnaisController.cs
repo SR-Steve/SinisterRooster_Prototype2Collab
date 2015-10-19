@@ -38,6 +38,7 @@ namespace SteveGussman{
 
         //To push/pull blocks - Branden
         public bool Grab = false;
+        public bool isTriggered = false;
         public Rigidbody2D Crate;
 
         // Initialization -Steve
@@ -97,6 +98,12 @@ namespace SteveGussman{
 					maxSpeed = 2f;
             }
 
+            if (grounded && Input.GetAxis("Action") != 0 && isTriggered) //Grabs if grounded after pressing x -Branden
+            {
+                Grab = true; //For grabbing and letting go -Branden
+                Crate.isKinematic = false; //Crate is Kinematic naturally -Branden
+            }
+
             if (Grab) //If Grab is true -Branden
             {
                 Crate.velocity = (new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0)); //Add the horizontal velocity to Crate -Branden
@@ -114,12 +121,19 @@ namespace SteveGussman{
         void OnTriggerStay2D(Collider2D other)
         {
             if (other.gameObject.tag == "Crate") //Checks for tag Crate -Branden
-                if (Input.GetAxis("Action") != 0) //Grabs if grounded after pressing x -Branden
+            {
+                isTriggered = true;
+                if (grounded && Input.GetAxis("Action") != 0 && isTriggered) //Grabs if grounded after pressing x -Branden
                 {
-                    Grab = true; //For grabbing and letting go -Branden
                     Crate = other.gameObject.GetComponentInParent<Rigidbody2D>(); //getting Crate rigidbody -Branden
-                    Crate.isKinematic = false; //Crate is Kinematic naturally -Branden
                 }
+            }
+        }
+
+        void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.gameObject.tag == "Crate")
+                isTriggered = false;
         }
 
         //Fun little side thing I made. Once the player touches the box they will begin to float up, nothing serious -Branden
