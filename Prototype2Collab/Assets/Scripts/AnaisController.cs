@@ -96,6 +96,7 @@ namespace SteveGussman{
 				}else // Walking left and facing left -Steve
 					maxSpeed = 2f;
             }
+           
 
             if (Grab) //If Grab is true -Branden
             {
