@@ -16,7 +16,6 @@ public class eprompt : MonoBehaviour{
 	
 	void OnTriggerEnter2D(Collider2D col) 
 	{
-		if (col.gameObject.name == "front") 
 		if (col.gameObject.name == "center") 
 			ebutton.enabled = true;	//e-button prompt will appear over player -Adam Thai 
 	}
@@ -24,7 +23,6 @@ public class eprompt : MonoBehaviour{
 
 	void OnTriggerExit2D(Collider2D col)
 	{
-		if (col.gameObject.name == "front")
 		if (col.gameObject.name == "center")
 			ebutton.enabled=false; // if too far from "GameObject" e-button prompt will disappear -Adam Thai
 	}
