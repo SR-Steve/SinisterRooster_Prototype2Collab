@@ -16,6 +16,8 @@ namespace SteveGussman{
 	
 		// Reference to Rigidbody2D component -Steve
 		Rigidbody2D bod;
+		BoxCollider2D boxCollider;
+		CircleCollider2D circleCollider;
 		
 		public float maxSpeed = 2f;
 		float xInput;
@@ -40,6 +42,13 @@ namespace SteveGussman{
         public bool Grab = false;
 		bool isTriggered;
         public Rigidbody2D Crate;
+        
+        // For climbing ladders -Steve
+        bool climbingLadder;
+        bool startedClimbingThisFrame;
+        public LayerMask whatIsLadder;
+        bool headGround;
+        public Transform headCheck;
 
         // Initialization -Steve
         void Start(){
@@ -52,6 +61,8 @@ namespace SteveGussman{
 			// Get references for component fields -Steve
 			bod = GetComponent<Rigidbody2D>();
 			anim = GetComponent<Animator>();
+			boxCollider = GetComponent<BoxCollider2D>();
+			circleCollider = GetComponent<CircleCollider2D>();
 		}
 		
 		// Called once per physics step -Steve
@@ -60,13 +71,15 @@ namespace SteveGussman{
 			// Check if Anais is on the ground, tell Animator -Steve
 			grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
 			anim.SetBool("grounded", grounded);
-			// Take in lateral input -Steve
-			xInput = Input.GetAxis("Horizontal");
+			// Take in lateral input (unless you're on a ladder) -Steve
+			if(!climbingLadder)
+				xInput = Input.GetAxis("Horizontal");
 			/* Push the speed to the Animator's speed parameter so the animation
 		       state changes between idle and walking -Steve */
 			anim.SetFloat("speed", Mathf.Abs(xInput));
 			bod.velocity = new Vector2(xInput * maxSpeed, bod.velocity.y);
 		}
+		
 		
 		// Called once per frame -Steve
 		void Update(){
@@ -109,6 +122,36 @@ namespace SteveGussman{
                 Crate.velocity = (new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0)); //Add the horizontal velocity to Crate -Branden
                 Invoke("justGrabbed", 1); //After a second can let go of box -Branden
             }
+            
+			// Ladder climbing code -Steve
+			if(!climbingLadder && grounded && Physics2D.OverlapCircle(headCheck.position, groundRadius, whatIsLadder) && Input.GetAxis("Action") != 0f){
+				climbingLadder = true;
+				startedClimbingThisFrame = true;
+				bod.gravityScale = 0f;
+				boxCollider.isTrigger = true;
+				circleCollider.isTrigger = true;
+			}else if(!climbingLadder && grounded && Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsLadder) && Input.GetAxis("Action") != 0f){
+				climbingLadder = true;
+				startedClimbingThisFrame = true;
+				boxCollider.isTrigger = true;
+				circleCollider.isTrigger = true;
+				bod.gravityScale = 0f;
+			}
+			
+			if(climbingLadder){
+				float yInput = Input.GetAxis("Vertical");
+				if(Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsLadder))
+					bod.velocity = new Vector2(0f, yInput * maxSpeed);
+				else
+					bod.velocity = new Vector2(0f, 0f);
+				if(!startedClimbingThisFrame && grounded && Input.GetAxis("Action") != 0f){
+					climbingLadder = false;
+					boxCollider.isTrigger = false;
+					circleCollider.isTrigger = false;
+					bod.gravityScale = 1f;
+				}
+				startedClimbingThisFrame = false;
+			}
         }
 		
 		// Turns the player around logically and visually -Steve
