@@ -18,9 +18,7 @@ namespace FrantzFelix
 {
 	public class Climbing : MonoBehaviour 
 	{
-
-				
-		private bool touchingBox=false; // var to check if touching a wall or box-Frantz
+		public bool touchingBox=false; // var to check if touching a wall or box-Frantz
 		public bool canClimb=false;// var to check if box is climable-Frantz
 		public Transform boxCheck;//var to give position of wallBoxCheck object-Frantz
 		public float detectionRadius = .16f;// radius that you are checking for a wall-Frantz
@@ -36,9 +34,6 @@ namespace FrantzFelix
 		private Transform playerPosition;
 		private Bounds climbingBounds;//var to reference the bounds from which my ray can originate from-Frantz
 
-
-
-
 		void Start ()
 		{
 			torsoCollider = GetComponent<BoxCollider2D> ();
@@ -53,7 +48,11 @@ namespace FrantzFelix
 		{
 			climbingBounds = torsoCollider.bounds;//sets the height detection ray boundaries to the boundry of the torso collider-Frantz
 			climbingBounds.Expand (rayDisFromtorso);// expands the boundry to set height detection ray further away from player-Frantz
-			boxHcheck = new Vector2 (climbingBounds.max.x, climbingBounds.max.y);// sets where the height detection ray's orign will be-Frantz
+			// Check if facing right or left and set boxHCheck accordingly -Steve
+			if(player.transform.localScale.x > 0f)
+				boxHcheck = new Vector2 (climbingBounds.max.x, climbingBounds.max.y);// sets where the height detection ray's orign will be-Frantz
+			else
+				boxHcheck = new Vector2 (climbingBounds.min.x, climbingBounds.max.y);// sets where the height detection ray's orign will be-Frantz
 			touchingBox = Physics2D.OverlapCircle (boxCheck.position, detectionRadius, whatIsBox);// checks if player is touching a box-Frantz
 			boxHeightCheck= Physics2D.Raycast( boxHcheck, new Vector2 (0,-1),Mathf.Infinity,whatIsBox);//Makes a ray to detect if there is a box infront of the player and its distance between the rays origin and the top of the box-Frantz
 			groundHeightCheck = Physics2D.Raycast (boxHcheck, new Vector2 (0, -1), Mathf.Infinity, whatIsGround);//Makes a ray to detect if there is a ground underneath of the player and its distance between the rays origin and the ground-Frantz
@@ -66,6 +65,8 @@ namespace FrantzFelix
 				canClimb = true;
 			else
 				canClimb = false;
+				
+				
 		}
 
 		void FixedUpdate()
@@ -85,14 +86,18 @@ namespace FrantzFelix
 		void ClimbInYdir()
 		{
 			Vector3 temp;
-			temp = new Vector3 (0f, 1.1f,0f); 
+			temp = new Vector3 (0f, 1.1f,0f);
 			playerPosition.position += temp;//adds 1.1 to the y direction-Frantz
 		}
 		//This function adds 1 to the current x positon-Frantz
 		void ClimbInXdir()
 		{
 			Vector3 temp;
-			temp = new Vector3 (1f, 0f,0f); //adds 1 to the x direction-Frantz
+			// Checking if facing right or left and applying climb x force accordingly -Steve
+			if(player.transform.localScale.x > 0f)
+				temp = new Vector3 (1f, 0f,0f); //adds 1 to the x direction-Frantz
+			else
+				temp = new Vector3(-1f, 0f, 0f);
 			playerPosition.position += temp;
 		}
 	}
