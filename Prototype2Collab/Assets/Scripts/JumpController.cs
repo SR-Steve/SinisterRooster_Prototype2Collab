@@ -6,6 +6,7 @@ assigned to the gameobject to work. Let me know if I need to chnage anything, us
 
 using UnityEngine;
 using System.Collections;
+using SteveGussman;
 
 namespace JakeHohing
 {
@@ -58,13 +59,14 @@ namespace JakeHohing
         // Update is called once per frame
         void Update()
         {
+            AnaisController Anais = GetComponent<AnaisController>(); //Importing AnaisController variables -Branden
             //checking if grounded
             if (!grounded && GetComponent<Rigidbody2D>().velocity.y == 0)
             {
                 grounded = true;
             }
             //setting grounded to false if jump is initiated 
-            if (Input.GetButtonDown("Jump") && grounded == true)
+            if (Input.GetButtonDown("Jump") && grounded == true && !Anais.Grab && !Anais.climbingLadder) //Cannot Jump when Grab or climbing is true -Branden
             {
                 bod.AddForce(transform.up * jumpForce);
                 grounded = false;
