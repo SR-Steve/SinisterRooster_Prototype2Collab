@@ -40,11 +40,11 @@ namespace SteveGussman{
 
         //To push/pull blocks - Branden
         public bool Grab = false;
-		public bool isTriggered;
+		bool isTriggered;
         public Rigidbody2D Crate;
         
         // For climbing ladders -Steve
-        public bool climbingLadder;
+        bool climbingLadder;
         bool startedClimbingThisFrame;
         public LayerMask whatIsLadder;
         bool headGround;
@@ -78,7 +78,7 @@ namespace SteveGussman{
 		       state changes between idle and walking -Steve */
 			anim.SetFloat("speed", Mathf.Abs(xInput));
 			bod.velocity = new Vector2(xInput * maxSpeed, bod.velocity.y);
-        }
+		}
 		
 		
 		// Called once per frame -Steve
@@ -86,57 +86,45 @@ namespace SteveGussman{
 			// Issues have to do w. these conds. only cheking when going a dir. you're not already
 			if(xInput > 0f){ // Walking right -Steve
 				if(!right){ // Walking right but facing left -Steve
-                    if (!turning && !Grab) { // If not turning right, should be... -Steve
-                        turnTime = Time.time;
-                        turning = true;
-                        maxSpeed = 0.67f; // Slower walk backward -Steve
-                    }
-                    // Walk backward slowly for 0.9 seconds before turning around -Steve
-                    else if (Time.time - turnTime > 0.9f && !Grab)
-                        Flip();
-                }
-                else if (!Grab)// Walking right and facing right -Steve
-                    maxSpeed = 2f;
-                else //If the player is Grabbing something, walk slower -Branden
-                    maxSpeed = 1f;
+					if(!turning){ // If not turning right, should be... -Steve
+						turnTime = Time.time;
+						turning = true;
+						maxSpeed = 0.67f; // Slower walk backward -Steve
+					}
+					// Walk backward slowly for 0.9 seconds before turning around -Steve
+					else if(Time.time - turnTime > 0.9f)
+						Flip();
+				}else // Walking right & facing right -Steve
+					maxSpeed = 2f;
 				
 			}else if(xInput < 0f){ // Walking left -Steve
-                if (right)
-                { // Walking left but facing right -Steve
-                    if (!turning && !Grab)
-                    { // If not turning right, should be... -Steve
-                        turnTime = Time.time;
-                        turning = true;
-                        maxSpeed = 0.67f; // Slower walk backward -Steve
-                    }
-                    // Walk backward slowly for 0.9 seconds before turning around -Steve
-                    else if (Time.time - turnTime > 0.9f && !Grab)
-                        Flip();
-                }
-                else if (!Grab)// Walking left and facing left -Steve
-                    maxSpeed = 2f;
-                else //If the player is Grabbing something, walk slower -Branden
-                    maxSpeed = 1f;
+				if(right){ // Walking left but facing right -Steve
+					if(!turning){ // If not turning right, should be... -Steve
+						turnTime = Time.time;
+						turning = true;
+						maxSpeed = 0.67f; // Slower walk backward -Steve
+					} 
+					// Walk backward slowly for 0.9 seconds before turning around -Steve
+					else if(Time.time - turnTime > 0.9f)
+						Flip();
+				}else // Walking left and facing left -Steve
+					maxSpeed = 2f;
             }
-
-            if (isTriggered)
-            {
-                if (grounded && Input.GetAxis("Action") != 0f) //Grabs if grounded after pressing x -Branden
-                    Grab = true;
-            }
-            Debug.Log("player velocity" + bod.velocity);
+            
+            if(isTriggered){
+            	if(grounded && Input.GetAxis("Action" )!= 0f){
+            		Grab = true;
+            	}
+            }           
 
             if (Grab) //If Grab is true -Branden
             {
-                maxSpeed = 1f;
-                Crate.velocity = (new Vector2(bod.velocity.x, 0)); //Add the horizontal velocity to Crate -Branden
-                Debug.Log(Crate.velocity);
-                Debug.Log("player velocity" + bod.velocity);
+                Crate.velocity = (new Vector2(GetComponent<Rigidbody2D>().velocity.x, 0)); //Add the horizontal velocity to Crate -Branden
                 Invoke("justGrabbed", 1); //After a second can let go of box -Branden
             }
-
-            // Ladder climbing code -Steve
-            if (!climbingLadder && grounded && Physics2D.OverlapCircle(headCheck.position, groundRadius, whatIsLadder) && Input.GetAxis("Action") != 0f){
+            
+			// Ladder climbing code -Steve
+			if(!climbingLadder && grounded && Physics2D.OverlapCircle(headCheck.position, groundRadius, whatIsLadder) && Input.GetAxis("Action") != 0f){
 				climbingLadder = true;
 				startedClimbingThisFrame = true;
 				bod.gravityScale = 0f;
@@ -178,15 +166,16 @@ namespace SteveGussman{
 			if (other.gameObject.tag == "Crate") //Checks for tag Crate -Branden
 			{
 				isTriggered = true;
-				Crate = other.gameObject.GetComponentInParent<Rigidbody2D>(); //getting Crate rigidbody -Branden
-            }
-
-            /*if(other.gameObject.tag == "FloatingCrate")
+				//if (grounded && Input.GetAxis("Action") != 0) //Grabs if grounded after pressing x -Branden
+					Crate = other.gameObject.GetComponentInParent<Rigidbody2D>(); //getting Crate rigidbody -Branden
+			}
+			
+			/*if(other.gameObject.tag == "FloatingCrate")
 			{
 				Crate = other.gameObject.GetComponentInParent<Rigidbody2D>(); //getting Crate rigidbody -Branden
 				Crate.velocity = (new Vector2(0, 1)); //Make it float upwards -Branden
 			}*/
-        }
+		}
 		
 		void OnTriggerExit2D(Collider2D other)
 		{
