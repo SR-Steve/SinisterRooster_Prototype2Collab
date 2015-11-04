@@ -66,7 +66,7 @@ namespace JakeHohing
                 grounded = true;
             }
             //setting grounded to false if jump is initiated 
-            if (Input.GetButtonDown("Jump") && grounded == true && !Anais.Grab && !Anais.climbingLadder) //Cannot Jump when Grab or climbing is true -Branden
+            if (Input.GetButtonDown("Jump") && grounded == true && !Anais.grab && !Anais.climbingLadder) //Cannot Jump when Grab or climbing is true -Branden
             {
                 bod.AddForce(transform.up * jumpForce);
                 grounded = false;

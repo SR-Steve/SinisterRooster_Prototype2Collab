@@ -39,9 +39,9 @@ namespace SteveGussman{
         Animator anim;
 
         //To push/pull blocks - Branden
-        public bool Grab = false;
+        public bool grab = false; // Lower-cased -Steve
         public bool isTriggered;
-        public Rigidbody2D Crate;
+        public Rigidbody2D crate; // Lower-cased -Steve
 
         // For climbing ladders -Steve
         public bool climbingLadder;
@@ -80,6 +80,8 @@ namespace SteveGussman{
 		       state changes between idle and walking -Steve */
             anim.SetFloat("speed", Mathf.Abs(xInput));
             bod.velocity = new Vector2(xInput * maxSpeed, bod.velocity.y);
+            if(grab)
+				crate.velocity = new Vector2(xInput * maxSpeed, crate.velocity.y); // Control the crate as well when grabbing -- works but reaquires frictionless floor -Steve
         }
 
 
@@ -91,17 +93,17 @@ namespace SteveGussman{
             { // Walking right -Steve
                 if (!right)
                 { // Walking right but facing left -Steve
-                    if (!turning && !Grab)
+                    if (!turning && !grab)
                     { // If not turning right, should be... -Steve
                         turnTime = Time.time;
                         turning = true;
                         maxSpeed = 0.67f; // Slower walk backward -Steve
                     }
                     // Walk backward slowly for 0.9 seconds before turning around -Steve
-                    else if (Time.time - turnTime > 0.9f && !Grab)
+                    else if (Time.time - turnTime > 0.9f && !grab)
                         Flip();
                 }
-                else if (!Grab)// Walking right and facing right -Steve
+                else if (!grab)// Walking right and facing right -Steve
                     maxSpeed = 2f;
                 else //If the player is Grabbing something, walk slower -Branden
                     maxSpeed = 1f;
@@ -111,34 +113,33 @@ namespace SteveGussman{
             { // Walking left -Steve
                 if (right)
                 { // Walking left but facing right -Steve
-                    if (!turning && !Grab)
+                    if (!turning && !grab)
                     { // If not turning right, should be... -Steve
                         turnTime = Time.time;
                         turning = true;
                         maxSpeed = 0.67f; // Slower walk backward -Steve
                     }
                     // Walk backward slowly for 0.9 seconds before turning around -Steve
-                    else if (Time.time - turnTime > 0.9f && !Grab)
+                    else if (Time.time - turnTime > 0.9f && !grab)
                         Flip();
                 }
-                else if (!Grab)// Walking left and facing left -Steve
+                else if (!grab)// Walking left and facing left -Steve
                     maxSpeed = 2f;
-                else //If the player is Grabbing something, walk slower -Branden
-                    maxSpeed = 1f;
+                /*else //If the player is Grabbing something, walk slower -Branden
+                    maxSpeed = 1f;*/ // I think we can remove this because it's being done below under if(grab) -Steve
             }
 
             if (isTriggered)
             {
                 if (grounded && Input.GetAxis("Action") != 0f) //Grabs if grounded after pressing x -Branden
-                    Grab = true;
+                    grab = true;
             }
             Debug.Log("player velocity" + bod.velocity);
 
-            if (Grab) //If Grab is true -Branden
+            if (grab) //If Grab is true -Branden
             {
                 maxSpeed = 1f;
-                Crate.velocity = (new Vector2(bod.velocity.x, 0)); //Add the horizontal velocity to Crate -Branden
-                Debug.Log(Crate.velocity);
+                Debug.Log(crate.velocity);
                 Debug.Log("player velocity" + bod.velocity);
                 Invoke("justGrabbed", 1); //After a second can let go of box   -Branden
             }
@@ -189,10 +190,10 @@ namespace SteveGussman{
 
         void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.tag == "Crate") //Checks for tag Crate -Branden
+            if (!grab && other.gameObject.tag == "Crate") //Checks for tag Crate -Branden // Check !grab to avoid crate-swap glitch -Steve
             {
                 isTriggered = true;
-                Crate = other.gameObject.GetComponentInParent<Rigidbody2D>(); //getting Crate rigidbody -Branden
+                crate = other.gameObject.GetComponentInParent<Rigidbody2D>(); //getting Crate rigidbody -Branden
             }
 
             /*if(other.gameObject.tag == "FloatingCrate")
@@ -204,7 +205,7 @@ namespace SteveGussman{
 
         void OnTriggerExit2D(Collider2D other)
         {
-            if (other.gameObject.tag == "Crate")
+            if (grab && other.gameObject.tag == "Crate") // Checking grab is more of a formality for consistency here, I guess... maybe it can be removed -Steve
                 isTriggered = false;
         }
 
@@ -213,9 +214,9 @@ namespace SteveGussman{
         {
             if (Input.GetAxis("Action") != 0) //Should gave frame where it cannot be pressed again -Branden
             {
-                Grab = false;
-                Crate.isKinematic = true; //So it can't be pushed again -Branden 
-                Crate.velocity = (new Vector2(0, 0)); //Stop the box -Branden
+                grab = false;
+                crate.isKinematic = true; //So it can't be pushed again -Branden 
+                crate.velocity = (new Vector2(0, 0)); //Stop the box -Branden
             }
         }
     }
