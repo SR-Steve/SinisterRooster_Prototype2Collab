@@ -24,6 +24,8 @@ using System.Collections;
 namespace JoshCastor {
 
 	public class Chandelier : MotionPlatform {
+	
+		public GameObject anais;
 
         /*
 		    Update is called once per physics time step
@@ -49,6 +51,7 @@ namespace JoshCastor {
 			// Change platform destination to next point (which should be endPoint) - Josh
 			if(other.transform.tag == "Player")
 			{
+				anais.transform.SetParent(transform);
 				pointSelection++;
 				if (pointSelection < points.Length)
                     setCurrentPoint(points[pointSelection]);
@@ -62,6 +65,7 @@ namespace JoshCastor {
 			// Change platform destination back to startPoint
 			if (other.transform.tag == "Player")
 			{
+				anais.transform.SetParent(null);
 				pointSelection = 0;
 				setCurrentPoint(points[pointSelection]);
 				Debug.Log ("Moving Up");
