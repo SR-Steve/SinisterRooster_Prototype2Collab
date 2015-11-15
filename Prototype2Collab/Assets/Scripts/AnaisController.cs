@@ -37,8 +37,12 @@ namespace SteveGussman{
 
         // Reference to Animator component -Steve
         Animator anim;
+        //To change sprites -Branden
+        SpriteRenderer spr;
+        public Sprite Button_Up;
+        public Sprite Button_Down;
 
-        //To push/pull blocks - Branden
+        //To push/pull blocks -Branden
         public bool grab = false; // Lower-cased -Steve
         public bool isTriggered;
         public Rigidbody2D crate; // Lower-cased -Steve
@@ -49,6 +53,7 @@ namespace SteveGussman{
         public LayerMask whatIsLadder;
         bool headGround;
         public Transform headCheck;
+
 
         // Initialization -Steve
         void Start()
@@ -64,6 +69,9 @@ namespace SteveGussman{
             anim = GetComponent<Animator>();
             boxCollider = GetComponent<BoxCollider2D>();
             circleCollider = GetComponent<CircleCollider2D>();
+
+            //For changing sprites reference spr -Branden
+            spr = GetComponent<SpriteRenderer>();
         }
 
         // Called once per physics step -Steve
@@ -201,6 +209,12 @@ namespace SteveGussman{
             {
                 isTriggered = true;
                 crate = other.gameObject.GetComponentInParent<Rigidbody2D>(); //getting Crate rigidbody -Branden
+            }
+
+            if (other.gameObject.tag == "Button")
+            {
+                spr.sprite = Button_Down;
+
             }
 
             /*if(other.gameObject.tag == "FloatingCrate")
