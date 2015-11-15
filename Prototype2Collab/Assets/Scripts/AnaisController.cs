@@ -82,46 +82,6 @@ namespace SteveGussman{
             bod.velocity = new Vector2(xInput * maxSpeed, bod.velocity.y);
             if(grab)
 				crate.velocity = new Vector2(xInput * maxSpeed, crate.velocity.y); // Control the crate as well when grabbing -- works but reaquires frictionless floor -Steve
-
-			// Ladder climbing code -Steve
-			// Copy/Pasted from Update() to FixedUpdate() and set "enable to climb ladder" button to UP/DOWN-Josh
-			if (!climbingLadder && grounded && Physics2D.OverlapCircle(headCheck.position, groundRadius, whatIsLadder) && Input.GetAxis("Vertical") != 0f)
-			{
-				climbingLadder = true;
-				startedClimbingThisFrame = true;
-				bod.gravityScale = 0f;
-				boxCollider.isTrigger = true;
-				circleCollider.isTrigger = true;
-			}
-			else if (!climbingLadder && grounded && Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsLadder) && Input.GetAxis("Vertical") != 0f)
-			{
-				climbingLadder = true;
-				startedClimbingThisFrame = true;
-				bod.gravityScale = 0f;
-				boxCollider.isTrigger = true;
-				circleCollider.isTrigger = true;
-			}
-			
-			if (climbingLadder)
-			{
-				float yInput = Input.GetAxis("Vertical");
-				if (Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsLadder))
-				{
-						bod.velocity = new Vector2(0f, yInput * maxSpeed);
-				}
-				else
-				{
-					bod.velocity = new Vector2(0f, 0f);
-				}
-				if (!startedClimbingThisFrame && grounded && Input.GetAxis("Vertical") != 0f)
-				{
-					climbingLadder = false;
-					boxCollider.isTrigger = false;
-					circleCollider.isTrigger = false;
-					bod.gravityScale = 1f;
-				}
-				startedClimbingThisFrame = false;
-			}
         }
 
 
@@ -184,7 +144,40 @@ namespace SteveGussman{
                 Invoke("justGrabbed", 1); //After a second can let go of box   -Branden
             }
 
-            
+            // Ladder climbing code -Steve
+            if (!climbingLadder && grounded && Physics2D.OverlapCircle(headCheck.position, groundRadius, whatIsLadder) && Input.GetAxis("Action") != 0f)
+            {
+                climbingLadder = true;
+                startedClimbingThisFrame = true;
+                bod.gravityScale = 0f;
+                boxCollider.isTrigger = true;
+                circleCollider.isTrigger = true;
+            }
+            else if (!climbingLadder && grounded && Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsLadder) && Input.GetAxis("Action") != 0f)
+            {
+                climbingLadder = true;
+                startedClimbingThisFrame = true;
+                boxCollider.isTrigger = true;
+                circleCollider.isTrigger = true;
+                bod.gravityScale = 0f;
+            }
+
+            if (climbingLadder)
+            {
+                float yInput = Input.GetAxis("Vertical");
+                if (Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsLadder))
+                    bod.velocity = new Vector2(0f, yInput * maxSpeed);
+                else
+                    bod.velocity = new Vector2(0f, 0f);
+                if (!startedClimbingThisFrame && grounded && Input.GetAxis("Action") != 0f)
+                {
+                    climbingLadder = false;
+                    boxCollider.isTrigger = false;
+                    circleCollider.isTrigger = false;
+                    bod.gravityScale = 1f;
+                }
+                startedClimbingThisFrame = false;
+            }
         }
 
         // Turns the player around logically and visually -Steve

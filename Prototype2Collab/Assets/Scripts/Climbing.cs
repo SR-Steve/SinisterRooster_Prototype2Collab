@@ -18,7 +18,8 @@ namespace FrantzFelix
 {
 	public class Climbing : MonoBehaviour 
 	{
-		public bool touchingBox=false; // var to check if touching a wall or box-Frantz
+		public bool touchingBox=false; // var to check if touching a box-Frantz
+		public bool touchingWall=false;//var to check if touching a wall- Frantz
 		public bool canClimb=false;// var to check if box is climable-Frantz
 		public Transform boxCheck;//var to give position of wallBoxCheck object-Frantz
 		public float detectionRadius = .16f;// radius that you are checking for a wall-Frantz

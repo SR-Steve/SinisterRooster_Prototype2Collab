@@ -26,6 +26,7 @@ namespace JoshCastor {
 	public class Chandelier : MotionPlatform {
 	
 		public GameObject anais;
+		public GameObject drapWall;
 
         /*
 		    Update is called once per physics time step
@@ -42,6 +43,10 @@ namespace JoshCastor {
 			 * 
 			 * - Josh
 			 */
+			if(transform.position==points[1].position)//Checks when at end point of chaddy daddy-Frantz
+				drapWall.SendMessage("MoveDown");// sends message from the 'Drop' wall-Frantz
+
+
             MoveToPoint(getCurrentPoint()); // Move platform to destination
         }
 
