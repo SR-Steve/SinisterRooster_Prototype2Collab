@@ -146,6 +146,12 @@ namespace SteveGussman{
                 Invoke("justGrabbed", 1); //After a second can let go of box   -Branden
             }
 
+            if (grab && !grounded)
+            {
+                grab = false;
+                isTriggered = false;
+            }
+
             // Ladder climbing code -Steve
             if (!climbingLadder && grounded && Physics2D.OverlapCircle(headCheck.position, groundRadius, whatIsLadder) && Input.GetAxis("Action") != 0f)
             {
