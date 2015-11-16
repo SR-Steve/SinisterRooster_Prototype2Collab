@@ -151,6 +151,12 @@ namespace SteveGussman{
                 grab = false;
                 isTriggered = false;
             }
+            else if (grab && !crate.isKinematic)
+            {
+                grab = false;
+                isTriggered = false;
+            }
+
 
             // Ladder climbing code -Steve
             if (!climbingLadder && grounded && Physics2D.OverlapCircle(headCheck.position, groundRadius, whatIsLadder) && Input.GetAxis("Action") != 0f)
