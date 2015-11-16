@@ -37,6 +37,7 @@ namespace SteveGussman{
 
         // Reference to Animator component -Steve
         Animator anim;
+        
 
         //To push/pull blocks - Branden
         public bool grab = false; // Lower-cased -Steve
@@ -64,6 +65,7 @@ namespace SteveGussman{
             anim = GetComponent<Animator>();
             boxCollider = GetComponent<BoxCollider2D>();
             circleCollider = GetComponent<CircleCollider2D>();
+
         }
 
         // Called once per physics step -Steve
