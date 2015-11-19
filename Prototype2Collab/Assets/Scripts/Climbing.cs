@@ -9,6 +9,10 @@ Some changes I need to make in the future are : Fix this to work with boxes of a
 add half of the boxes size  to the boxs position. I need to flip the ray cast with the player. I need to find a better way to get her to "climb" the box because 
 right now the player is basically teleporting on top of the box. This also needs to work for boxs of different sizes. I need to put in certain places where the art team 
 can animate her climb. I need to play around with the ray distance(s) and not make them infinate. Lastly I need to make the code a little bit more readable I will probly put somethings in functions of their own.
+
+Update: 11/19/15(baby castle)
+Need to press E to climb to stop the "climbing while touching box bug" also implimented the climbing with forces,
+but the force in the x direction is still teleporting player over.
 */
 
 
@@ -34,7 +38,7 @@ namespace FrantzFelix
 		private Rigidbody2D player;
 		private Transform playerPosition;
 		private Bounds climbingBounds;//var to reference the bounds from which my ray can originate from-Frantz
-
+		public bool ePushed;// for baby castles-frank
 		void Start ()
 		{
 			torsoCollider = GetComponent<BoxCollider2D> ();
@@ -62,10 +66,16 @@ namespace FrantzFelix
 
 			//if player is touching the box and the box is smaller then 2, the player is able to climb it-Frantz
 			// 2 is just for the purposes of the prototype,  I feel like it will change when we scale everything -Frantz
-			if ((touchingBox && actualBoxHeight <= 2))
+			if ((touchingBox && ((actualBoxHeight <= 2.1)&& (actualBoxHeight>=1.9))))
 				canClimb = true;
 			else
 				canClimb = false;
+
+			//for baby castles- frank
+			if (Input.GetButtonDown ("E") == true) { 
+				ePushed = true;
+			} else
+				ePushed = false;
 				
 				
 		}
@@ -74,32 +84,44 @@ namespace FrantzFelix
 		{
 			// This checks the players position, if its larger then the box postion, and if it is a climable box, she climbs-Frantz
 			//Side note: need to change to fit all boxs and not just a box of size two -Frantz
-			if ((transform.position.y) >= (boxs.transform.position.y + 1) && canClimb==true)
+			if (((transform.position.y) >= (boxs.transform.position.y + 1)) && canClimb==true && ePushed)//the E is in for baby castle
 			{
-				player.isKinematic=true;
+
+			
 				ClimbInYdir();// moves player in y direction-Frantz
-				ClimbInXdir();// moves player in x direction-Frantz
-				player.isKinematic=false;
+
+				Invoke("ClimbInXdir",.7f);//moves player in x direction after .7secs have passed-Frantz 
+				//ClimbInXdir();// moves player in x direction-Frantz
+
 				Debug.Log ("Anasis Climbs");
 			}
 		}
-		//This function adds 1.1 to the current y positon-Frantz
+		//Updated this function to now add a force in the y direction when climbing-Frantz 
 		void ClimbInYdir()
 		{
 			Vector3 temp;
-			temp = new Vector3 (0f, 1.1f,0f);
-			playerPosition.position += temp;//adds 1.1 to the y direction-Frantz
+			temp = new Vector3 (0f, 220f,0f);
+			player.AddForce(temp);
+			//playerPosition.position += temp;//adds 1.1 to the y direction-Frantz
+
 		}
-		//This function adds 1 to the current x positon-Frantz
+		//Updated this function to now add a force in the x direction when climbing-Frantz 
 		void ClimbInXdir()
 		{
 			Vector3 temp;
 			// Checking if facing right or left and applying climb x force accordingly -Steve
-			if(player.transform.localScale.x > 0f)
-				temp = new Vector3 (1f, 0f,0f); //adds 1 to the x direction-Frantz
-			else
-				temp = new Vector3(-1f, 0f, 0f);
-			playerPosition.position += temp;
+			if (player.transform.localScale.x > 0f)
+			{
+				temp = new Vector3 (2500f, 0f, 0f); //adds 1 to the x direction-Frantz
+				player.AddForce (temp);
+			} 
+			else 
+			{
+				temp = new Vector3 (-2500f, 0f, 0f);
+				player.AddForce (temp);
+			}
+
+
 		}
 	}
 }
