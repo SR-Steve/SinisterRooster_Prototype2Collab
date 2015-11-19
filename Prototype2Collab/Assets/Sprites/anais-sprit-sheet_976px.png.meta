@@ -1,0 +1,253 @@
+fileFormatVersion: 2
+guid: 9d6457764a7e28047bdda3a84f7df399
+timeCreated: 1447883767
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: anais-sprit-sheet_976px_0
+    21300002: anais-sprit-sheet_976px_1
+    21300004: anais-sprit-sheet_976px_2
+    21300006: anais-sprit-sheet_976px_3
+    21300008: anais-sprit-sheet_976px_4
+    21300010: anais-sprit-sheet_976px_5
+    21300012: anais-sprit-sheet_976px_6
+    21300014: anais-sprit-sheet_976px_7
+    21300016: anais-sprit-sheet_976px_8
+    21300018: anais-sprit-sheet_976px_9
+    21300020: anais-sprit-sheet_976px_10
+    21300022: anais-sprit-sheet_976px_11
+    21300024: anais-sprit-sheet_976px_12
+    21300026: anais-sprit-sheet_976px_13
+    21300028: anais-sprit-sheet_976px_14
+    21300030: anais-sprit-sheet_976px_15
+    21300032: anais-sprit-sheet_976px_16
+    21300034: anais-sprit-sheet_976px_17
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 400
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: anais-sprit-sheet_976px_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1952
+        width: 976
+        height: 976
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anais-sprit-sheet_976px_1
+      rect:
+        serializedVersion: 2
+        x: 976
+        y: 1952
+        width: 976
+        height: 976
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anais-sprit-sheet_976px_2
+      rect:
+        serializedVersion: 2
+        x: 1952
+        y: 1952
+        width: 976
+        height: 976
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anais-sprit-sheet_976px_3
+      rect:
+        serializedVersion: 2
+        x: 2928
+        y: 1952
+        width: 976
+        height: 976
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anais-sprit-sheet_976px_4
+      rect:
+        serializedVersion: 2
+        x: 3904
+        y: 1952
+        width: 976
+        height: 976
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anais-sprit-sheet_976px_5
+      rect:
+        serializedVersion: 2
+        x: 4880
+        y: 1952
+        width: 976
+        height: 976
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anais-sprit-sheet_976px_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 976
+        width: 976
+        height: 976
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anais-sprit-sheet_976px_7
+      rect:
+        serializedVersion: 2
+        x: 976
+        y: 976
+        width: 976
+        height: 976
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anais-sprit-sheet_976px_8
+      rect:
+        serializedVersion: 2
+        x: 1952
+        y: 976
+        width: 976
+        height: 976
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anais-sprit-sheet_976px_9
+      rect:
+        serializedVersion: 2
+        x: 2928
+        y: 976
+        width: 976
+        height: 976
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anais-sprit-sheet_976px_10
+      rect:
+        serializedVersion: 2
+        x: 3904
+        y: 976
+        width: 976
+        height: 976
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anais-sprit-sheet_976px_11
+      rect:
+        serializedVersion: 2
+        x: 4880
+        y: 976
+        width: 976
+        height: 976
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anais-sprit-sheet_976px_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 976
+        height: 976
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anais-sprit-sheet_976px_13
+      rect:
+        serializedVersion: 2
+        x: 976
+        y: 0
+        width: 976
+        height: 976
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anais-sprit-sheet_976px_14
+      rect:
+        serializedVersion: 2
+        x: 1952
+        y: 0
+        width: 976
+        height: 976
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anais-sprit-sheet_976px_15
+      rect:
+        serializedVersion: 2
+        x: 2928
+        y: 0
+        width: 976
+        height: 976
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anais-sprit-sheet_976px_16
+      rect:
+        serializedVersion: 2
+        x: 3904
+        y: 0
+        width: 976
+        height: 976
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anais-sprit-sheet_976px_17
+      rect:
+        serializedVersion: 2
+        x: 4880
+        y: 0
+        width: 976
+        height: 976
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

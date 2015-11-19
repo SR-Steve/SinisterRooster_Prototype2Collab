@@ -50,6 +50,10 @@ namespace SteveGussman{
         public LayerMask whatIsLadder;
         bool headGround;
         public Transform headCheck;
+        
+        // For the curtain puzzle... throwing this together last minute -Steve
+        public Cloth[] otherCloths;
+		bool affectedCurtainsThisJump = false;
 
         // Initialization -Steve
         void Start()
@@ -78,6 +82,7 @@ namespace SteveGussman{
             // Take in lateral input (unless you're on a ladder) -Steve
             if (!climbingLadder)
                 xInput = Input.GetAxis("Horizontal");
+            else xInput = 0f;
             /* Push the speed to the Animator's speed parameter so the animation
 		       state changes between idle and walking -Steve */
             anim.SetFloat("speed", Mathf.Abs(xInput));
@@ -153,22 +158,24 @@ namespace SteveGussman{
             }
 
             // Ladder climbing code -Steve
-            if (!climbingLadder && grounded && Physics2D.OverlapCircle(headCheck.position, groundRadius, whatIsLadder) && Input.GetAxis("Action") != 0f)
+            if (!climbingLadder && grounded && Physics2D.OverlapCircle(headCheck.position, groundRadius, whatIsLadder) && Input.GetAxis("Vertical") != 0f)
             {
                 climbingLadder = true;
+                anim.SetBool("ClimbingLadder", true);
                 startedClimbingThisFrame = true;
                 bod.gravityScale = 0f;
                 boxCollider.isTrigger = true;
                 circleCollider.isTrigger = true;
             }
-            else if (!climbingLadder && grounded && Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsLadder) && Input.GetAxis("Action") != 0f)
+            /*else if (!climbingLadder && grounded && Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsLadder) && Input.GetAxis("Vertical") != 0f)
             {
                 climbingLadder = true;
+				anim.SetBool("ClimbingLadder", true);
                 startedClimbingThisFrame = true;
                 boxCollider.isTrigger = true;
                 circleCollider.isTrigger = true;
                 bod.gravityScale = 0f;
-            }
+            }*/
 
             if (climbingLadder)
             {
@@ -177,9 +184,10 @@ namespace SteveGussman{
                     bod.velocity = new Vector2(0f, yInput * maxSpeed);
                 else
                     bod.velocity = new Vector2(0f, 0f);
-                if (!startedClimbingThisFrame && grounded && Input.GetAxis("Action") != 0f)
+                if (!startedClimbingThisFrame && grounded && Input.GetAxis("Vertical") != 0f)
                 {
                     climbingLadder = false;
+					anim.SetBool("ClimbingLadder", false);
                     boxCollider.isTrigger = false;
                     circleCollider.isTrigger = false;
                     bod.gravityScale = 1f;
@@ -194,6 +202,19 @@ namespace SteveGussman{
             right = !right;
             turning = false;
             transform.localScale = new Vector3(-transform.localScale.x, 1f, 1f);
+        }
+        
+        void OnTriggerStay2D(Collider2D other){
+        	if(grounded)
+        		affectedCurtainsThisJump = false;
+			if(other.tag == "Curtains"){
+				otherCloths = other.gameObject.GetComponentsInChildren<Cloth>(); // This is re-run abusively but for Baby Castles, not worried about efficiency 3:39 PM -Steve
+				if(!grounded && !affectedCurtainsThisJump){
+					otherCloths[0].externalAcceleration += new Vector3(-3f, 1f, -1f);
+					otherCloths[1].externalAcceleration += new Vector3(3f, 1f, 1f);
+					affectedCurtainsThisJump = true;
+				}
+			}
         }
 
         void OnTriggerEnter2D(Collider2D other)
