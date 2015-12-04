@@ -18,7 +18,7 @@ public class Camera : MonoBehaviour {
 	// Called once per frame
 	void Update () {
 		if(following){
-			transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x, transform.position.y, transform.position.z), 4 * Time.deltaTime);
+			transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x, target.transform.position.y, transform.position.z), 4 * Time.deltaTime);
 			if(Time.time - followTime >= 5f)
 				following = false;
 		}
